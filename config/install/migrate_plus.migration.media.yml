@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies: {  }
+id: media
+migration_tags: null
+label: 'People media'
+
+source:
+  plugin: csv
+  path: 'public://migration_sources/files.csv'
+  delimiter: ','
+  enclosure: '"'
+  header_row_count: 1
+  keys:
+    - fid
+
+process:
+  bundle:
+    plugin: default_value
+    default_value: artwork
+
+  mid: fid
+  name: name
+
+  uid:
+    plugin: default_value
+    default_value: 1
+
+  # Image field: see media_entity.bundle.image.yml
+  name: title
+  field_media_image/target_id: fid
+  field_media_image/alt: title
+  field_media_image/title: title
+
+destination:
+  plugin: entity:media
+  move: true
