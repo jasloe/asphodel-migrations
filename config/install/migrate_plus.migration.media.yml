@@ -1,26 +1,24 @@
 langcode: en
 status: true
-dependencies: {  }
 id: media
 migration_tags: null
-label: 'People media'
+label: media file migration
 
 source:
   plugin: csv
-  path: 'public://migration_sources/files.csv'
+  ids: [id]
+  path: 'public://sources/inventory.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
-  keys:
-    - fid
 
 process:
   bundle:
     plugin: default_value
     default_value: artwork
 
-  mid: fid
-  name: name
+  mid: id
+  name: title
 
   uid:
     plugin: default_value
@@ -28,7 +26,7 @@ process:
 
   # Image field: see media_entity.bundle.image.yml
   name: title
-  field_media_image/target_id: fid
+  field_media_image/target_id: id
   field_media_image/alt: title
   field_media_image/title: title
 

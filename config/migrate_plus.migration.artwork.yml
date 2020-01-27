@@ -1,19 +1,19 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies: {}
 id: artwork
 migration_tags: null
-label: 'Migrate artwork from csv source.'
+label: "Migrate artwork from csv source."
 
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migration_sources/artwork.csv'
-  delimiter: ','
+  path: "public://sources/inventory.csv"
+  delimiter: ","
   enclosure: '"'
   header_row_count: 1
   keys:
-    - id
+    - ids
 
 process:
   type:
@@ -23,16 +23,16 @@ process:
   uid:
     plugin: default_value
     default_value: 1
-  
+
   title: title
-  
+
   field_artwork_images/target_id:
     source: fid
     plugin: explode
-    delimiter: ';'
-  
+    delimiter: ";"
+
 destination:
   plugin: entity:node
 
 template: null
-migration_dependencies: {  }
+migration_dependencies: {}

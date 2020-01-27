@@ -1,32 +1,30 @@
 langcode: en
 status: true
 id: files
-migration_tags: csv
-label: "Migrate files from csv source."
+migration_tags: null
+label: image file migration
 
 source:
   plugin: csv
-  ids: [id]
-  path: public://sources/inventory.csv
-  delimiter: ","
-  enclosure: '"'
+  track_changes: true
+  path: "public://migrations/inventory.csv"
   header_row_count: 1
+  keys:
+    - id
 
 process:
   uid:
     plugin: default_value
     default_value: 1
 
+  fid: id
   filename: filename
   uri:
     plugin: file_copy
     source:
       - filepath
       - uri
-  fid: id
 
 destination:
   plugin: "entity:file"
-  source_path_property: filepath
-  destination_path_property: uri
   move: true
